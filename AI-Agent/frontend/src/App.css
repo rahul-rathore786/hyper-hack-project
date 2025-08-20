@@ -166,30 +166,30 @@ body {
 
 .form-actions {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 2rem; /* Increased margin */
+  justify-content: center;
+  margin-top: 1.0rem;
 }
 
 /* Button styles */
 .btn-primary {
-  padding: 1rem 2rem; /* Larger button */
-  background: #ffc107; /* Golden background */
-  color: #1f2937; /* Dark text */
+  padding: 1rem 3rem;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: white;
   border: none;
   border-radius: 0.5rem;
   font-weight: 600;
-  font-size: 1.1rem; /* Larger text */
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
-  background: #1976d2; /* Blue on hover */
-  color: white; /* White text on hover */
-  box-shadow: 0 6px 8px rgba(25, 118, 210, 0.2);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+  transform: translateY(-2px);
 }
 
 .btn-primary:disabled {

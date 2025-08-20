@@ -105,7 +105,7 @@ function App() {
 
                 <div className="form-group">
                   <label htmlFor="gitcode" className="form-label">
-                    GitHub Repository URL <span className="required">*</span>
+                    GitHub Codebase <span className="required">*</span>
                   </label>
                   <div className="input-container">
                     <textarea
