@@ -26,7 +26,7 @@ function App() {
     try {
       const base = process.env.REACT_APP_API_BASE || "";
       const url = `${base}/api/evaluate`;
-      const res = await axios.post(url, formData, { timeout: 30000 });
+      const res = await axios.post(url, formData);
       setEvaluation(res.data);
     } catch (err) {
       setError("Failed to get evaluation. Please try again.");
