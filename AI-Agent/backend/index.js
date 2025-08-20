@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 // Initialize Alith agent with the appropriate model
 const agent = new Agent({
-  model: process.env.ALITH_MODEL || "gemini-2.5-flash", // Default to gemini if not specified
+  model: process.env.ALITH_MODEL || "gemini-2.5-pro", // Default to gemini if not specified
   apiKey: process.env.GEMINI_API_KEY,
   baseUrl: process.env.ALITH_BASE_URL || "https://generativelanguage.googleapis.com/v1beta/openai", // Default to Gemini's OpenAI compatible endpoint
 });
