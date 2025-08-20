@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { Agent } = require('alith');
 require('dotenv').config();
 
 const app = express();
@@ -10,7 +10,12 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// Initialize Alith agent with the appropriate model
+const agent = new Agent({
+  model: process.env.ALITH_MODEL || "gemini-2.5-flash", // Default to gemini if not specified
+  apiKey: process.env.GEMINI_API_KEY,
+  baseUrl: process.env.ALITH_BASE_URL || "https://generativelanguage.googleapis.com/v1beta/openai", // Default to Gemini's OpenAI compatible endpoint
+});
 
 app.post('/api/evaluate', async (req, res) => {
   const { title, description, gitcode } = req.body;
@@ -20,8 +25,6 @@ app.post('/api/evaluate', async (req, res) => {
   }
 
   try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
-
         const prompt = `
         # ROLE: You are a technical project reviewer.
         # TASK: 
@@ -46,11 +49,13 @@ app.post('/api/evaluate', async (req, res) => {
         }
       `;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = await response.text();
-
-    // Clean the response to get valid JSON
+    // Use Alith agent to generate response
+    const response = await agent.prompt(prompt, {
+      responseFormat: { type: "json_object" }
+    });
+    
+    // Parse the JSON response
+    const text = response.toString();
     const jsonResponse = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
 
     res.json(jsonResponse);
