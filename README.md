@@ -1,19 +1,39 @@
-# SafeWorkPay
-
-A decentralized freelancing platform powered by blockchain and AI to ensure secure, transparent, and fair transactions between clients and freelancers.
-## submission information
-
-Submited to the TechFairness hackathon 2025
-
-link https://www.hackquest.io/projects/Fair-Pay
-
-live link https://fair-pay-freelancing.vercel.app/
-
-youtube video https://www.youtube.com/watch?v=C-gQ17mcFEM
-
 ## Project Information
 
 **SafeWorkPay**
+
+SafeWorkPay is a freelancing platform for **IT projects and coding tasks**. It uses **Blockchain** and **AI** technology to make sure clients and freelancers have a **secure and fair experience**.
+
+Here's how it works:
+
+- **Blockchain** handles all payments, so transactions are transparent and secure.
+- In Case of **Dispute** **AI** checks the code submitted by freelancers and check the **completion percentage** of the project.
+- This approach helps avoid the common problems with other platforms, like **high fees, payment delays, biased and manual dispute resolution**.
+
+---
+
+## submission information
+
+Submited to the Hyper-hack hackathon 2025
+
+- Forum link https://forum.ceg.vote/t/safework-pay/9228
+- live website https://safe-work-pay-hyper.vercel.app/
+- How to use
+
+---
+
+## 📜 Deployment Notes
+
+#### Core Testnet
+
+The smart contracts are already deployed on the **Hyperion Testnet** at the following addresses:
+
+| Contract Name | Address                                                                                                                                               |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **DappWorks** | [`0x7DB29Dc2720996bFd07C76ed70702b977B153181`](https://hyperion-testnet-explorer.metisdevops.link/address/0x7DB29Dc2720996bFd07C76ed70702b977B153181) |
+| **USDT**      | [`0x5c7FbBF922643eaea24F4Cf7FD2F220e70659Ce7`](https://hyperion-testnet-explorer.metisdevops.link/address/0x5c7FbBF922643eaea24F4Cf7FD2F220e70659Ce7) |
+
+🔗 _You can visit the [Hyperion Testnet Explorer](https://hyperion-testnet-explorer.metisdevops.link) to check the transactions._
 
 ---
 
@@ -73,6 +93,7 @@ Below are screenshots showcasing different pages and functionalities of **SafeWo
 > Track and manage project updates, delete projects, and view bids.
 
 ---
+
 ### 4. 💼 Bidding Interface
 
 ![Place a bid](public/place-bid.png)
@@ -164,11 +185,6 @@ To run the SafeWorkPay frontend, follow these steps:
    yarn start
    ```
 
-**Note**: The smart contracts are already deployed on the Sepolia testnet at the following addresses:
-
-- DappWorks: `0xE9F9bcD880e71FFD32F64D874Fa889c7163CDb7d`
-- USDT: `0xb2d7EFb7393fcFCC7C76dcA5da05c8177bA1F6fF`
-
 **Environment Setup**: Make sure to add your MetaMask private key, CometChat credentials, and RPC URL in the `.env` file for the application to function correctly.
 
 #### add the environment variables in the .env file
@@ -190,7 +206,7 @@ The AI Agent is a separate component that assists in dispute resolution by evalu
 1. **Frontend Setup for AI Agent**
    - Navigate to the frontend directory:
      ```bash
-     cd frontend
+     cd AI-Agent/frontend
      ```
    - Install dependencies:
      ```bash
@@ -206,7 +222,7 @@ change file name .env.example to .env and add the environment variables in the .
 2. **Backend Setup for AI Agent**
    - Navigate to the backend directory of the AI Agent:
      ```bash
-     cd backend
+     cd AI-Agent/backend
      ```
    - Install dependencies:
      ```bash
