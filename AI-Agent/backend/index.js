@@ -17,6 +17,38 @@ const agent = new Agent({
   baseUrl: process.env.ALITH_BASE_URL || "https://generativelanguage.googleapis.com/v1beta/openai", // Default to Gemini's OpenAI compatible endpoint
 });
 
+// Helpers to safely parse/normalize AI output
+function sanitizeFences(text) {
+  return String(text || "").replace(/```json/gi, "").replace(/```/g, "").trim();
+}
+
+function extractJson(text) {
+  const cleaned = sanitizeFences(text);
+  try {
+    return JSON.parse(cleaned);
+  } catch (_) {
+    // Try to slice between first '{' and last '}'
+    const start = cleaned.indexOf("{");
+    const end = cleaned.lastIndexOf("}");
+    if (start !== -1 && end !== -1 && end > start) {
+      const sliced = cleaned.slice(start, end + 1);
+      try { return JSON.parse(sliced); } catch (_) {}
+    }
+  }
+  return null;
+}
+
+function coerceEvaluation(obj, fallbackText) {
+  const feedback = (obj && obj.feedback != null)
+    ? String(obj.feedback)
+    : (fallbackText ? String(fallbackText).slice(0, 1200) : "");
+  let pct = obj ? obj.completionPct : undefined;
+  if (typeof pct === 'string') pct = parseInt(pct, 10);
+  if (!Number.isFinite(pct)) pct = 0;
+  pct = Math.max(0, Math.min(100, Math.round(pct)));
+  return { feedback, completionPct: pct };
+}
+
 app.post('/api/evaluate', async (req, res) => {
   const { title, description, gitcode } = req.body;
 
@@ -53,15 +85,31 @@ app.post('/api/evaluate', async (req, res) => {
     const response = await agent.prompt(prompt, {
       responseFormat: { type: "json_object" }
     });
-    
-    // Parse the JSON response
-    const text = response.toString();
-    const jsonResponse = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
 
-    res.json(jsonResponse);
+    // Normalize possible response shapes
+    const maybeText = (typeof response === 'string')
+      ? response
+      : (response?.content ?? response?.choices?.[0]?.message?.content ?? response?.toString?.());
+
+    let parsed = null;
+    // If response is already an object with desired keys
+    if (response && typeof response === 'object' && (response.feedback != null || response.completionPct != null)) {
+      parsed = response;
+    } else if (maybeText) {
+      parsed = extractJson(maybeText);
+    }
+
+    if (!parsed) {
+      console.warn('Model returned non-JSON or empty output; returning fallback. Raw:', maybeText);
+      return res.json(coerceEvaluation(null, maybeText || 'Unable to parse model output.'));
+    }
+
+    // Validate and coerce final shape
+    const jsonResponse = coerceEvaluation(parsed, maybeText);
+    return res.json(jsonResponse);
   } catch (error) {
     console.error('Error evaluating project:', error);
-    res.status(500).json({ error: 'Failed to evaluate project.' });
+    res.status(502).json({ error: 'Failed to evaluate project.', details: String(error.message || error) });
   }
 });
 
