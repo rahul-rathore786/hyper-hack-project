@@ -1,3 +1,14 @@
+## Submission Information
+
+Submited to the Hyper-hack hackathon 2025
+
+- Forum link https://forum.ceg.vote/t/safework-pay/9228
+- live website https://safe-work-pay-hyper.vercel.app/
+- How to Use https://youtu.be/4ziDhqqv0iU
+- Presentation Link (Problem, Solution, Vision & Future Direction) https://www.youtube.com/watch?v=TT0_12-1jjc
+
+---
+
 ## Project Information
 
 **SafeWorkPay**
@@ -12,16 +23,6 @@ Here's how it works:
 
 ---
 
-## submission information
-
-Submited to the Hyper-hack hackathon 2025
-
-- Forum link https://forum.ceg.vote/t/safework-pay/9228
-- live website https://safe-work-pay-hyper.vercel.app/
-- How to use
-
----
-
 ## 📜 Deployment Notes
 
 #### Core Testnet
@@ -30,7 +31,7 @@ The smart contracts are already deployed on the **Hyperion Testnet** at the foll
 
 | Contract Name | Address                                                                                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **DappWorks** | [`0x7DB29Dc2720996bFd07C76ed70702b977B153181`](https://hyperion-testnet-explorer.metisdevops.link/address/0x7DB29Dc2720996bFd07C76ed70702b977B153181) |
+| **Escrow** | [`0x7DB29Dc2720996bFd07C76ed70702b977B153181`](https://hyperion-testnet-explorer.metisdevops.link/address/0x7DB29Dc2720996bFd07C76ed70702b977B153181) |
 | **USDT**      | [`0x5c7FbBF922643eaea24F4Cf7FD2F220e70659Ce7`](https://hyperion-testnet-explorer.metisdevops.link/address/0x5c7FbBF922643eaea24F4Cf7FD2F220e70659Ce7) |
 
 🔗 _You can visit the [Hyperion Testnet Explorer](https://hyperion-testnet-explorer.metisdevops.link) to check the transactions._
